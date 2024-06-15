@@ -51,6 +51,8 @@ public class Projectile : PooledObject
     // deal damage when passing through enemy
     private void OnTriggerEnter(Collider other)
     {
+        
+        
         // filter for allies
         if(other.TryGetComponent(out Unit hit) && hit.Team == Team) return;
 

@@ -19,6 +19,6 @@ public class MechAnimations : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetFloat("Sped", _agent.velocity.magnitude / _agent.speed, _dampTime, Time.deltaTime);
+        _animator.SetFloat("Speed", _agent.velocity.magnitude / _agent.speed, _dampTime, Time.deltaTime);
     }
 }
