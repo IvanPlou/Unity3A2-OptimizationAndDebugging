@@ -23,7 +23,9 @@ public class Weapon : MonoBehaviour
         // select next muzzle to spawn from
         Transform muzzle = _muzzles[_muzzleIndex++ % _muzzles.Length];
         // spawn projectile from pool system and fire with team
-        Projectile projectile = Instantiate(_projectilePrefab, muzzle.transform.position, Quaternion.LookRotation(direction)) as Projectile;
+        // Projectile projectile = Instantiate(_projectilePrefab, muzzle.transform.position, Quaternion.LookRotation(direction)) as Projectile;
+        Projectile projectile = PoolSystem.Instance.Get(_projectilePrefab, muzzle.transform.position, Quaternion.LookRotation(direction)) as Projectile;
         projectile.Fire(team);
+
     }
 }

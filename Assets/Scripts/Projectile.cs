@@ -51,8 +51,6 @@ public class Projectile : PooledObject
     // deal damage when passing through enemy
     private void OnTriggerEnter(Collider other)
     {
-        
-        
         // filter for allies
         if(other.TryGetComponent(out Unit hit) && hit.Team == Team) return;
 
@@ -62,15 +60,17 @@ public class Projectile : PooledObject
             // find nearby colliders and damage enemies (comparing team)
             int count = Physics.OverlapSphereNonAlloc(transform.position, _explosionRadius, _hits, _unitMask);
             for (int i = 0; i < count; i++)
-            {
+            { 
                 if (_hits[i].TryGetComponent(out Unit unit) && unit.Team != Team) unit.Damage(_damage);
             }
 
             // spawn explosion prefab from pool system
             Explosion explosion = PoolSystem.Instance.Get(_explosionPrefab, transform.position, transform.rotation) as Explosion;
             explosion.Radius = _explosionRadius;
-        }
-        else // single target damage fallback
+        }        
+        // single target damage fallback
+        // check if hit is null to avoid console error
+        else if (hit != null) 
         {
             hit.Damage(_damage);
         }
